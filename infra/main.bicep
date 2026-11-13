@@ -8,7 +8,7 @@ param environmentName string
 
 @minLength(1)
 @description('Primary location for all resources')
-param location string = 'australiaeast'
+param location string = 'eastus'
 
 param resourcePrefix string = 'aiagent-ws'
 
@@ -18,7 +18,7 @@ param chatCompletionModelFormat string = 'OpenAI'
 param chatCompletionModelVersion string = '2024-11-20'
 param chatCompletionModelSkuName string = 'Standard'
 param chatCompletionModelCapacity int = 50
-param modelLocation string = 'australiaeast'
+param modelLocation string = 'eastus'
 
 // Embedding model parameters
 param embeddingModelName string = 'text-embedding-3-small'
