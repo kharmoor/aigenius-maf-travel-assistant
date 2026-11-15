@@ -50,7 +50,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2024-05-15' = {
         name: 'EnableServerless'
       }
     ]
-    enableFreeTier: true
+    enableFreeTier: false
     enableAutomaticFailover: false
     enableMultipleWriteLocations: false
   }

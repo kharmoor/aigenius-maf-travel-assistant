@@ -7,7 +7,7 @@ Set-Content -Path $envFilePath -Value ""
 # Append new values to the .env file
 $azureEnvName = azd env get-value AZURE_ENV_NAME
 $azureLocation = azd env get-value AZURE_LOCATION
-$azureAIProjectEndpoint = azd env get-value AZURE_AI_PROJECT_ENDPOINT
+# $azureAIProjectEndpoint = azd env get-value AZURE_AI_PROJECT_ENDPOINT
 $azureAIFoundryServiceEndpoint = azd env get-value AZURE_AI_FOUNDRY_SERVICE_ENDPOINT
 $azureResourceGroup = azd env get-value AZURE_RESOURCE_GROUP
 $azureSubscriptionId = azd env get-value AZURE_SUBSCRIPTION_ID
@@ -28,7 +28,7 @@ $frontendUri = azd env get-value FRONTEND_URI
 
 Add-Content -Path $envFilePath -Value "AZURE_ENV_NAME=$azureEnvName"
 Add-Content -Path $envFilePath -Value "AZURE_LOCATION=$azureLocation"
-Add-Content -Path $envFilePath -Value "AZURE_AI_PROJECT_ENDPOINT=$azureAIProjectEndpoint"
+# Add-Content -Path $envFilePath -Value "AZURE_AI_PROJECT_ENDPOINT=$azureAIProjectEndpoint"
 Add-Content -Path $envFilePath -Value "AZURE_AI_FOUNDRY_SERVICE_ENDPOINT=$azureAIFoundryServiceEndpoint"
 Add-Content -Path $envFilePath -Value "AZURE_RESOURCE_GROUP=$azureResourceGroup"
 Add-Content -Path $envFilePath -Value "AZURE_SUBSCRIPTION_ID=$azureSubscriptionId"

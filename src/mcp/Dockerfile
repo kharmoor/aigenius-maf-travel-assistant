@@ -1,17 +1,18 @@
 # Build stage
+#Load the dotnet sdk which is needed later on for Run. Publish, etc.  Create /src temp workspace and change into that directory
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Copy ServiceDefaults first
+# Copy ServiceDefaults project first
 COPY ["ContosoTravel.ServiceDefaults/ContosoTravel.ServiceDefaults.csproj", "ContosoTravel.ServiceDefaults/"]
 
 # Copy mcp project
 COPY ["mcp/ContosoTravel.McpServer.csproj", "mcp/"]
 
-# Restore dependencies
+# Restore dependencies to download all of the packages
 RUN dotnet restore "mcp/ContosoTravel.McpServer.csproj"
 
-# Copy everything else
+# Copy everything else.  Copy all of the code
 COPY ["ContosoTravel.ServiceDefaults/", "ContosoTravel.ServiceDefaults/"]
 COPY ["mcp/", "mcp/"]
 
@@ -31,4 +32,5 @@ COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:8080
 ENV PORT=8080
 
+#Launch these when the docker container is started
 ENTRYPOINT ["dotnet", "ContosoTravel.McpServer.dll"]

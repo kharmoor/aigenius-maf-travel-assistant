@@ -46,7 +46,7 @@ param embeddingModelCapacity int
 resource aiFoundryAccount 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' existing = {
   name: aiFoundryAccountName
 }
-
+//Deploy gpt-4o model
 resource chatCompletionModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = {
   parent: aiFoundryAccount
   name: modelName
@@ -62,7 +62,7 @@ resource chatCompletionModelDeployment 'Microsoft.CognitiveServices/accounts/dep
     }
   }
 }
-
+//Deploy text-embedding-3-small embeddings
 resource embeddingModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = {
   parent: aiFoundryAccount
   dependsOn: [

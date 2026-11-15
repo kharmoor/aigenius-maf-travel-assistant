@@ -94,16 +94,17 @@ module aiFoundryAccount 'modules/ai-foundry-account.bicep' = {
 }
 
 // Create AI Foundry Project
-module aiProject 'modules/ai-project.bicep' = {
-  scope: rg
-  name: 'proj-${uniqueSuffixValue}'
-  params: {
-    name: resourceNames.aiFoundryProject
-    location: location
-    tags: tags
-    aiFoundryName: aiFoundryAccount.outputs.name
-  }
-}
+// Disabled: model calls use the account endpoint directly.
+// module aiProject 'modules/ai-project.bicep' = {
+//   scope: rg
+//   name: 'proj-${uniqueSuffixValue}'
+//   params: {
+//     name: resourceNames.aiFoundryProject
+//     location: location
+//     tags: tags
+//     aiFoundryName: aiFoundryAccount.outputs.name
+//   }
+// }
 
 // Create the OpenAI Service
 module aiDependencies 'modules/ai-services.bicep' = {
@@ -228,14 +229,14 @@ module backendApp 'modules/containerapp.bicep' = {
         name: 'USE_GITHUB_MODELS'
         value: 'false'
       }
-      {
-        name: 'AZURE_AI_PROJECT_ENDPOINT'
-        value: aiProject.outputs.endpoint
-      }
-      {
-        name: 'AZURE_AI_PROJECT_NAME'
-        value: aiProject.outputs.name
-      }
+//       {
+//         name: 'AZURE_AI_PROJECT_ENDPOINT'
+//         value: aiProject.outputs.endpoint
+//       }
+//       {
+//         name: 'AZURE_AI_PROJECT_NAME'
+//         value: aiProject.outputs.name
+//       }
       {
         name: 'AZURE_AI_FOUNDRY_SERVICE_ENDPOINT'
         value: 'https://${aiFoundryAccount.outputs.name}.services.ai.azure.com/'
@@ -333,14 +334,14 @@ module mcpServerApp 'modules/containerapp.bicep' = {
         name: 'USE_GITHUB_MODELS'
         value: 'false'
       }
-      {
-        name: 'AZURE_AI_PROJECT_ENDPOINT'
-        value: aiProject.outputs.endpoint
-      }
-      {
-        name: 'AZURE_AI_PROJECT_NAME'
-        value: aiProject.outputs.name
-      }
+//       {
+//         name: 'AZURE_AI_PROJECT_ENDPOINT'
+//         value: aiProject.outputs.endpoint
+//       }
+//       {
+//         name: 'AZURE_AI_PROJECT_NAME'
+//         value: aiProject.outputs.name
+//       }
       {
         name: 'AZURE_AI_FOUNDRY_SERVICE_ENDPOINT'
         value: 'https://${aiFoundryAccount.outputs.name}.services.ai.azure.com/'
@@ -455,8 +456,8 @@ output AZURE_LOG_ANALYTICS_WORKSPACE_NAME string = shared.outputs.logAnalyticsWo
 output AZURE_APP_INSIGHTS_NAME string = shared.outputs.appInsightsName
 output AZURE_APP_INSIGHTS_CONNECTION_STRING string = shared.outputs.appInsightsConnectionString
 
-output AZURE_AI_PROJECT_NAME string = aiProject.outputs.name
-output AZURE_AI_PROJECT_ENDPOINT string = aiProject.outputs.endpoint
+// output AZURE_AI_PROJECT_NAME string = aiProject.outputs.name
+// output AZURE_AI_PROJECT_ENDPOINT string = aiProject.outputs.endpoint
 output AZURE_AI_FOUNDRY_SERVICE_ENDPOINT string = 'https://${aiFoundryAccount.outputs.name}.services.ai.azure.com/'
 output AZURE_AI_SERVICES_ENDPOINT string = aiFoundryAccount.outputs.endpoint
 output AZURE_AI_SERVICES_KEY string = aiFoundryAccount.outputs.apiKey

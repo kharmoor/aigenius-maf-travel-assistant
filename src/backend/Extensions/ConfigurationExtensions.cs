@@ -41,11 +41,12 @@ public static class ConfigurationExtensions
         var cosmosDbUserProfileContainer = EnvironmentVariableHelper.GetConfigValue("COSMOS_DB_USER_PROFILE_CONTAINER", configuration);
         var cosmosDbFlightsContainer = EnvironmentVariableHelper.GetConfigValue("COSMOS_DB_FLIGHTS_CONTAINER", configuration, "Flights");
 
-        if (string.IsNullOrWhiteSpace(azureProjectEndpoint))
-        {
-            throw new InvalidOperationException
-                ("Azure AI Project endpoint not found. Set AZURE_AI_PROJECT_ENDPOINT in .env file.");
-        }
+        // Foundry project is optional; model calls use the AI Services endpoint.
+        // if (string.IsNullOrWhiteSpace(azureProjectEndpoint))
+        // {
+        //     throw new InvalidOperationException
+        //         ("Azure AI Project endpoint not found. Set AZURE_AI_PROJECT_ENDPOINT in .env file.");
+        // }
 
         var config = new ContosoTravelAppConfig
         {
